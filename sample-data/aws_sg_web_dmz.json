@@ -1,0 +1,49 @@
+{
+  "Description": "Public Application Load Balancer Ingress Security Group",
+  "GroupName": "sg-public-alb-dmz",
+  "GroupId": "sg-04438080112233445",
+  "VpcId": "vpc-0987654321fedcba0",
+  "IpPermissions": [
+    {
+      "FromPort": 80,
+      "ToPort": 80,
+      "IpProtocol": "tcp",
+      "IpRanges": [
+        {
+          "CidrIp": "0.0.0.0/0",
+          "Description": "Public HTTP Ingress (Redirected to 443 HTTPS at ALB)"
+        }
+      ]
+    },
+    {
+      "FromPort": 443,
+      "ToPort": 443,
+      "IpProtocol": "tcp",
+      "IpRanges": [
+        {
+          "CidrIp": "0.0.0.0/0",
+          "Description": "Public HTTPS Secure Ingress"
+        }
+      ],
+      "Ipv6Ranges": [
+        {
+          "CidrIpv6": "::/0",
+          "Description": "Public IPv6 HTTPS Ingress"
+        }
+      ]
+    }
+  ],
+  "IpPermissionsEgress": [
+    {
+      "FromPort": 8080,
+      "ToPort": 8080,
+      "IpProtocol": "tcp",
+      "IpRanges": [
+        {
+          "CidrIp": "10.0.20.0/24",
+          "Description": "Forwarding to internal target group ECS tasks"
+        }
+      ]
+    }
+  ]
+}

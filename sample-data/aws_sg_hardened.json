@@ -1,0 +1,24 @@
+{
+  "Description": "Hardened Database Security Group - Least Privilege Compliant",
+  "GroupName": "sg-hardened-db-cluster",
+  "GroupId": "sg-09988776655443322",
+  "VpcId": "vpc-0987654321fedcba0",
+  "IpPermissions": [
+    {
+      "FromPort": 5432,
+      "ToPort": 5432,
+      "IpProtocol": "tcp",
+      "IpRanges": [
+        {
+          "CidrIp": "10.0.10.0/24",
+          "Description": "Authorized App-Tier Subnet A only"
+        },
+        {
+          "CidrIp": "10.0.11.0/24",
+          "Description": "Authorized App-Tier Subnet B only"
+        }
+      ]
+    }
+  ],
+  "IpPermissionsEgress": []
+}
